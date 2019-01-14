@@ -40,6 +40,7 @@ class LineupOptimizer(object):
         self._solver_class = solver
         self._max_projected_ownership = None  # type: Optional[float]
         self._min_projected_ownership = None  # type: Optional[float]
+        self._pruning_alg = None # type: Optional[str]
 
     @property
     def budget(self):
@@ -125,6 +126,11 @@ class LineupOptimizer(object):
     def min_projected_ownership(self):
         # type: () -> Optional[float]
         return self._min_projected_ownership
+
+    @property
+    def pruning_alg(self):
+        # type: () -> Optional[str]
+        return self._pruning_alg
 
     def reset_lineup(self):
         self._lineup = []
@@ -355,6 +361,8 @@ class LineupOptimizer(object):
             rules.add(NormalObjective)
         if with_injured:
             rules.remove(RemoveInjuredRule)
+        #TODO add pruning here
+        #I think it would be good to expose player pool used for optimization
         players = [player for player in self._players
                    if player not in self._removed_players and player.max_exposure != 0.0]
         base_solver = self._solver_class()

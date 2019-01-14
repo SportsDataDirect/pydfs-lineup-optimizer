@@ -206,6 +206,9 @@ class OptimizerRulesTestCase(unittest.TestCase):
         self.assertEqual(lineups_with_players[1], 4)
         self.assertEqual(lineups_with_players[2], 10)
 
+    def test_top_lineup_pruning(self):
+        pass
+
 
 class ProjectedOwnershipTestCase(unittest.TestCase):
     @classmethod
